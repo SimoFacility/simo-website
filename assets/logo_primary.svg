@@ -1,0 +1,8 @@
+<svg viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(14,14) scale(0.156)">
+    <rect x="40" y="40" width="432" height="432" rx="84" fill="#123C61"/>
+    <path d="M256,112 A72,72 0 0,1 256,256" fill="none" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round"/>
+    <path d="M256,256 A72,72 0 0,0 256,400" fill="none" stroke="#35B37E" stroke-width="58" stroke-linecap="round"/>
+  </g>
+  <text x="88" y="62" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="700" fill="#123C61">SIMO</text>
+</svg>
