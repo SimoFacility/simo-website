@@ -39,6 +39,21 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
+// Kontaktformular: mailto per JS (vermeidet Chrome-Warnung bei action="mailto:")
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = contactForm.querySelector('#name').value.trim();
+    const email = contactForm.querySelector('#email').value.trim();
+    const leistung = contactForm.querySelector('#leistung').value;
+    const nachricht = contactForm.querySelector('#nachricht').value.trim();
+    const subject = 'Anfrage über simo-facility.de – ' + leistung;
+    const body = 'Name: ' + name + '\nE-Mail: ' + email + '\nGewünschte Leistung: ' + leistung + '\n\nNachricht:\n' + nachricht;
+    window.location.href = 'mailto:info@simo-facility.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+}
+
 // Only one FAQ item open at a time
 document.querySelectorAll('.faq-item').forEach((item) => {
   item.addEventListener('toggle', () => {
