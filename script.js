@@ -48,8 +48,7 @@ if (contactForm) {
     const email = contactForm.querySelector('#email').value.trim();
     const leistung = contactForm.querySelector('#leistung').value;
     const nachricht = contactForm.querySelector('#nachricht').value.trim();
-    const honey = contactForm.querySelector('#firma');
-    if (honey && honey.value) return; // Honeypot: Bots füllen das unsichtbare Feld
+    const honey = contactForm.querySelector('#xtrafld');
     const subject = 'Anfrage über simo-facility.de – ' + leistung;
     const btn = contactForm.querySelector('button[type="submit"]');
     const hint = contactForm.querySelector('.form-hint');
@@ -64,11 +63,13 @@ if (contactForm) {
           email: email,
           'Gewünschte Leistung': leistung,
           Nachricht: nachricht,
+          _honey: honey ? honey.value : '',
           _subject: subject,
           _template: 'table'
         })
       });
-      if (!r.ok) throw new Error('send failed');
+      const j = await r.json().catch(() => null);
+      if (!r.ok || !j || String(j.success) === 'false') throw new Error('send failed');
       contactForm.querySelectorAll('input, select, textarea').forEach((el) => { el.value = ''; el.disabled = true; });
       btn.textContent = 'Anfrage gesendet ✓';
       if (hint) hint.textContent = 'Vielen Dank! Wir melden uns innerhalb von 24 Stunden.';
