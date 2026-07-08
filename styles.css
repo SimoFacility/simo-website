@@ -297,7 +297,8 @@ header.scrolled { box-shadow: 0 6px 24px rgba(8,29,48,0.06); }
 /* Trust bar */
 .trustbar { background: var(--light); border-bottom: 1px solid var(--border); padding: 38px 0; }
 .trustbar .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.trust-item { text-align: center; padding: 0 8px; }
+.trust-item { text-align: center; padding: 0 8px; min-width: 0; }
+.trust-item h4, .trust-item p { hyphens: auto; overflow-wrap: break-word; }
 .trust-item .icon-wrap {
   width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 16px;
   background: var(--white); border: 1px solid var(--border);
