@@ -312,6 +312,10 @@
     </div>
 
     <form class="contact-form reveal" id="contactForm">
+      <div style="position:absolute; left:-9999px;" aria-hidden="true">
+        <label for="firma">Firma (bitte leer lassen)</label>
+        <input type="text" id="firma" name="_honey" tabindex="-1" autocomplete="off">
+      </div>
       <div>
         <label for="name">Name</label>
         <input type="text" id="name" name="Name" required>
@@ -337,7 +341,7 @@
         <textarea id="nachricht" name="Nachricht" placeholder="Was möchten Sie erledigt haben?"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Anfrage senden</button>
-      <p class="form-hint">Öffnet Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht an uns.</p>
+      <p class="form-hint">Ihre Anfrage geht direkt an uns – Antwort innerhalb von 24 Stunden.</p>
     </form>
   </div>
 </section>

@@ -39,18 +39,45 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Kontaktformular: mailto per JS (vermeidet Chrome-Warnung bei action="mailto:")
+// Kontaktformular: Versand über FormSubmit (AJAX), Fallback mailto
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = contactForm.querySelector('#name').value.trim();
     const email = contactForm.querySelector('#email').value.trim();
     const leistung = contactForm.querySelector('#leistung').value;
     const nachricht = contactForm.querySelector('#nachricht').value.trim();
+    const honey = contactForm.querySelector('#firma');
+    if (honey && honey.value) return; // Honeypot: Bots füllen das unsichtbare Feld
     const subject = 'Anfrage über simo-facility.de – ' + leistung;
-    const body = 'Name: ' + name + '\nE-Mail: ' + email + '\nGewünschte Leistung: ' + leistung + '\n\nNachricht:\n' + nachricht;
-    window.location.href = 'mailto:info@simo-facility.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const hint = contactForm.querySelector('.form-hint');
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet…';
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/info@simo-facility.de', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          Name: name,
+          email: email,
+          'Gewünschte Leistung': leistung,
+          Nachricht: nachricht,
+          _subject: subject,
+          _template: 'table'
+        })
+      });
+      if (!r.ok) throw new Error('send failed');
+      contactForm.querySelectorAll('input, select, textarea').forEach((el) => { el.value = ''; el.disabled = true; });
+      btn.textContent = 'Anfrage gesendet ✓';
+      if (hint) hint.textContent = 'Vielen Dank! Wir melden uns innerhalb von 24 Stunden.';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Anfrage senden';
+      const body = 'Name: ' + name + '\nE-Mail: ' + email + '\nGewünschte Leistung: ' + leistung + '\n\nNachricht:\n' + nachricht;
+      window.location.href = 'mailto:info@simo-facility.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
   });
 }
 
