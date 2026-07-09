@@ -57,7 +57,7 @@ if (contactForm) {
     try {
       const ctrl = new AbortController();
       const timeoutId = setTimeout(() => ctrl.abort(), 6000);
-      const r = await fetch('https://formsubmit.co/ajax/simo.facility@gmail.com', {
+      const r = await fetch('https://formsubmit.co/ajax/info@simo-facility.de', {
         method: 'POST',
         signal: ctrl.signal,
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
