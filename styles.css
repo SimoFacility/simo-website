@@ -490,7 +490,9 @@ form.contact-form {
 /* Footer */
 footer { background: var(--navy-dark); color: #C6D2DC; padding: 60px 0 28px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; margin-bottom: 44px; }
-.footer-grid img.footer-logo { height: 64px; width: auto; margin-bottom: 20px; }
+.footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.footer-brand img.footer-logo { height: 46px; width: auto; display: block; }
+.footer-wordmark { font-size: 27px; font-weight: 700; color: var(--white); letter-spacing: 0.14em; line-height: 1; }
 .footer-grid p { font-size: 14px; color: #93A6B6; max-width: 320px; }
 .footer-grid h5 { color: var(--white); font-size: 14px; margin: 0 0 16px; letter-spacing: 0.4px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }

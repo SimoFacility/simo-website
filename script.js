@@ -55,7 +55,7 @@ if (contactForm) {
     btn.disabled = true;
     btn.textContent = 'Wird gesendet…';
     try {
-      const r = await fetch('https://formsubmit.co/ajax/info@simo-facility.de', {
+      const r = await fetch('https://formsubmit.co/ajax/simo.facility@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
