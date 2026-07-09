@@ -55,8 +55,11 @@ if (contactForm) {
     btn.disabled = true;
     btn.textContent = 'Wird gesendet…';
     try {
+      const ctrl = new AbortController();
+      const timeoutId = setTimeout(() => ctrl.abort(), 6000);
       const r = await fetch('https://formsubmit.co/ajax/simo.facility@gmail.com', {
         method: 'POST',
+        signal: ctrl.signal,
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           Name: name,
@@ -68,6 +71,7 @@ if (contactForm) {
           _template: 'table'
         })
       });
+      clearTimeout(timeoutId);
       const j = await r.json().catch(() => null);
       if (!r.ok || !j || String(j.success) === 'false') throw new Error('send failed');
       contactForm.querySelectorAll('input, select, textarea').forEach((el) => { el.value = ''; el.disabled = true; });
