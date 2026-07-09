@@ -77,7 +77,7 @@ if (contactForm) {
       if (!r.ok || !j || String(j.success) === 'false') throw new Error('send failed');
       contactForm.querySelectorAll('input, select, textarea').forEach((el) => { el.value = ''; el.disabled = true; });
       btn.textContent = 'Anfrage gesendet ✓';
-      if (hint) hint.textContent = 'Vielen Dank! Wir melden uns innerhalb von 24 Stunden.';
+      if (hint) hint.textContent = 'Vielen Dank! Wir melden uns innerhalb von 24 Stunden. Tipp: Fotos vom Objekt gerne per WhatsApp – das macht Ihr Angebot noch präziser.';
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Anfrage senden';
