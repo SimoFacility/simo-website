@@ -57,18 +57,19 @@ if (contactForm) {
     try {
       const ctrl = new AbortController();
       const timeoutId = setTimeout(() => ctrl.abort(), 6000);
-      const r = await fetch('https://formsubmit.co/ajax/info@simo-facility.de', {
+      const r = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         signal: ctrl.signal,
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
+          access_key: 'b5f002df-f208-4c90-be0a-e45f22c0643b',
+          subject: subject,
+          from_name: 'SIMO Website',
           Name: name,
           email: email,
           'Gewünschte Leistung': leistung,
           Nachricht: nachricht,
-          _honey: honey ? honey.value : '',
-          _subject: subject,
-          _template: 'table'
+          botcheck: honey ? honey.value : ''
         })
       });
       clearTimeout(timeoutId);
